@@ -38,11 +38,14 @@ ${attributes.url}
   `;
 };
 
-window.onload = function () {
-  document.querySelector('#request-pane-2').addEventListener('click', async (event) => {
-    const t = document.querySelector('#request-pane-2 > pre > code');
-    const curlCommand = translate(t.innerHTML);
-    await navigator.clipboard.writeText(curlCommand);
-    console.info('Copied.');
-  });
+const copyCurl = async () => {
+  const element = document.querySelector('#request-pane-2 > pre > code');
+  const curlCommand = translate(element.innerHTML);
+  await navigator.clipboard.writeText(curlCommand);
+  console.info('Copied.');
+};
+
+window.onload = () => {
+  document.querySelector('#request-pane-2').addEventListener('click', async () => copyCurl());
+  document.querySelector('#app > div > div > div > div > div.styles__inspectPage__3rnNV > div.styles__section__3dDb2.styles__selector__3hiW9 > div > table > tbody').addEventListener('dblclick', async () => copyCurl());
 };
