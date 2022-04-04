@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+
+  "version": "1.0",
+  "name": "Ngrok Raw2cURL",
+  "description": "Copy Raw as cURL to clipboard. Just click on Raw test from http://localhost:4040/inspect/http.",
+
+  "content_scripts": [{
+    "matches": [ "http://localhost:4040/inspect/http" ],
+    "js": ["copyCurl.js"]
+  }]
+}
