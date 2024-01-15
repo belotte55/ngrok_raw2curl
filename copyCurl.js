@@ -30,7 +30,7 @@ const translate = (text) => {
 
   return `\
 curl \\
-${attributes.method ? `----request '${attributes.method.toUpperCase()}'` : ''} \\
+${attributes.method ? `--request '${attributes.method.toUpperCase()}'` : ''} \\
 ${Object.keys(attributes.headers).filter(key => attributes.headers[key]).map(key => `--header '${key}: ${attributes.headers[key]}'`).join(' \\\n')} \\
 ${attributes.data ? `--data-binary '${JSON.stringify(attributes.data).replace(/'/g, '\'\\\'\'')}'` : ''} \\
 '${attributes.url}'\
