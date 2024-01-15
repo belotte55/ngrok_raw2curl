@@ -30,12 +30,20 @@ const translate = (text) => {
 
   return `\
 curl \\
---compressed \\
-${attributes.userAgent ? `--user-agent '${attributes.userAgent}'` : ''} \\
+${attributes.method ? `----request '${attributes.method.toUpperCase()}'` : ''} \\
 ${Object.keys(attributes.headers).filter(key => attributes.headers[key]).map(key => `--header '${key}: ${attributes.headers[key]}'`).join(' \\\n')} \\
 ${attributes.data ? `--data-binary '${JSON.stringify(attributes.data).replace(/'/g, '\'\\\'\'')}'` : ''} \\
 '${attributes.url}'\
   `;
+//   return `\
+// curl \\
+// --compressed \\
+// ${attributes.method ? `----request '${attributes.method.toUpperCase()}'` : ''} \\
+// ${attributes.userAgent ? `--user-agent '${attributes.userAgent}'` : ''} \\
+// ${Object.keys(attributes.headers).filter(key => attributes.headers[key]).map(key => `--header '${key}: ${attributes.headers[key]}'`).join(' \\\n')} \\
+// ${attributes.data ? `--data-binary '${JSON.stringify(attributes.data).replace(/'/g, '\'\\\'\'')}'` : ''} \\
+// '${attributes.url}'\
+//   `;
 };
 
 const copyCurl = async () => {
@@ -52,7 +60,8 @@ window.onload = async () => {
   document.querySelector('#app > div > div > div > div > div > div > div > table > tbody').addEventListener('dblclick', copyCurl);
 };
 
-;(() => {
+(async () => {
+  await new Promise(resolve => setTimeout(resolve, 2000))
   const headerButton = document.createElement('a')
   headerButton.appendChild(document.createTextNode('Copy cURL'));
   headerButton.href = '#'
